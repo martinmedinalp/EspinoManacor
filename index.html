@@ -33,7 +33,7 @@ function _m(refs,settings){
  const ldiStatus=ll.value===null?ll.status:lower.value===null?lower.status:'LDI requiere lordosis L1–S1 positiva y distinta de cero';
  out.measurements.push({key:'GT',label:'Global tilt · centro C7–S1–eje bicoxofemoral',value:gt,status:gt===null?gtStatus:'Medido'}, {key:'LDI',label:'Distribución de lordosis (L4–S1 / L1–S1 × 100)',value:ldi,unit:'%',status:ldi===null?ldiStatus:'Calculado'});
  const mismatch=pi.value!==null&&ll.value!==null?pi.value-ll.value:null;
- out.measurements.push({key:'PI-LL',label:'Mismatch · incidencia pélvica − lordosis lumbar L1–S1',value:mismatch,unit:'°',status:mismatch===null?(pi.value===null?pi.status:ll.status):'Calculado'});
+ out.measurements.push({key:'PI-LL',label:'Mismatch · incidencia pélvica − lordosis lumbar L1–S1',value:mismatch===null?null:Math.abs(mismatch)<1e-8?0:mismatch,unit:'°',status:mismatch===null?(pi.value===null?pi.status:ll.status):'Calculado'});
  const rpv=pi.value!==null&&ss.value!==null?ss.value-(.59*pi.value+9):null;
  const rll=pi.value!==null&&ll.value!==null?ll.value-(.62*pi.value+29):null;
  const rsa=pi.value!==null&&gt!==null?gt-(.48*pi.value-15):null;
